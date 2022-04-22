@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+#Allows for inclusion of url.py from api
+from django.conf.urls import include
 urlpatterns = [
+    path('',include('contacts_api.urls')),
     path('admin/', admin.site.urls),
 ]
