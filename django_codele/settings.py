@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'question_api',
     #Added Django Rest Framework for API
     'rest_framework',
+    #Added cors to allow other origins to access API
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +46,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    #CORS middleware required
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -52,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+#Allows for access from all origins
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'django_codele.urls'
 
