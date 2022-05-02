@@ -11,21 +11,28 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+# Added dj_database_url for database info from env variables
+import dj_database_url
+import environ
+env = environ.Env()
+environ.Env.read_env()
+#Set up static files
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+# BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # edit this var
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-t5ckq4!uq5wwr7c71*&+l!gwefc%yh(+&q59(-qk7i+6b((r7y'
+SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','codele-backend.herokuapp.com']
 
 
 # Application definition
@@ -48,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     #CORS middleware required
     'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # add this
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,6 +66,8 @@ MIDDLEWARE = [
 ]
 #Allows for access from all origins
 CORS_ALLOW_ALL_ORIGINS = True
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage' # add this
 
 ROOT_URLCONF = 'django_codele.urls'
 
@@ -90,13 +100,15 @@ DATABASES = {
 #    }
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'codele_api',
+        'NAME': env("DATABASE_NAME"),
         'USER': '',
         'PASSWORD': '',
         'HOST': 'localhost'
     }
 }
 
+db_from_env = dj_database_url.config(conn_max_age=600) # add this
+DATABASES['default'].update(db_from_env) # add this
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -133,6 +145,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+# Added static root with os
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

@@ -1,0 +1,1 @@
+web: gunicorn djang_codele.wsgi
