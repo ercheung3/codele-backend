@@ -5,12 +5,12 @@ An application that is designed to help you pass technical interviews. Codele gi
 
 ## Hosted App Link
 
-[COMING SOON FRONT END]()\
-[COMING SOON BACK END]()
+[Frontend of Codele](https://codele.herokuapp.com/)\
+[Backend of Codele](https://codele-backend.herokuapp.com/)
 
 ## Preview of Codele
 
-![COMING SOON]()
+![Codele](https://imgur.com/a/5CRB9oS)
 
 ## Technology Used
 
