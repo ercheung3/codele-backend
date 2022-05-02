@@ -10,7 +10,7 @@ An application that is designed to help you pass technical interviews. Codele gi
 
 ## Preview of Codele
 
-[Imgur](https://imgur.com/WCjZxw7)
+[Codele](https://i.imgur.com/WCjZxw7.png)
 
 ## Technology Used
 
