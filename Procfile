@@ -1,1 +1,1 @@
-web: gunicorn djang_codele.wsgi
+web: gunicorn django_codele.wsgi
